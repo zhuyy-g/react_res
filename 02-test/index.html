@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <title></title>
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.min.js"></script>
+	</head>
+	<body>
+        <div id="app"></div>
+        <script type="text/babel">
+            class Test extends React.Component {
+                constructor(props) {
+                    super(props)
+                    this.state = {
+                        value: 1
+                    }
+                    this.add = this.add.bind(this)
+                    this.plus = this.plus.bind(this)
+                }
+                add() {
+                    let value = this.state.value
+                    console.log(value)
+                    this.setState({
+                        value: value+1
+                    })
+                }
+                plus() {
+                    let value = this.state.value
+                    this.setState({
+                        value: value-1
+                    })
+                }
+                render() {
+                    return (
+                        <div>
+                            <div>值: {this.state.value}</div>
+                            <div>
+                                <input type="button" value="+1" onClick={this.add}/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="button" value="-1" onClick={this.plus}/>
+                            </div>
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(<Test></Test>, document.getElementById("app"))
+        </script>
+	</body>
+</html>

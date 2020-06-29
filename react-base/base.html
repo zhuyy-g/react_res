@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <title></title>
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.min.js"></script>
+	</head>
+	<body>
+        <div id="test"></div>
+        <div id="test1"></div>
+        <script type="text/babel">
+            const vDom = <h1>Hello React！</h1>
+            // 以下演示的是前端的断点调试方法
+            // debugger
+            ReactDOM.render(vDom, document.getElementById('test'))
+        </script>
+        <script type="text/javascript">
+            const msg = 'I Like You!'
+            const myId = 'Atguigu'
+            const vDom1 = React.createElement('h2', {id:myId.toLowerCase()}, msg.toUpperCase())
+            // debugger
+            ReactDOM.render(vDom1, document.getElementById('test1'))
+        </script>
+	</body>
+</html>

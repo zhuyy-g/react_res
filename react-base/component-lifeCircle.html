@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <title></title>
+        <script src="js/react.development.js"></script>
+        <script src="js/react-dom.development.js"></script>
+        <script src="js/babel.min.js"></script>
+    </head>
+    <!-- 
+    需要在子组件改变父组件的状态
+    子组件不能直接改变父组件的状态
+    状态在哪个组件 更新状态的行为就定义在哪个组件
+    解决方法：父组件定义函数 传递给子组件 子组件调用
+     -->
+	<body>
+        <div id="test"></div>
+        <script type="text/babel">
+            class Life extends React.Component {
+                constructor(props) {
+                    super(props)
+                    this.state = {
+                        opacity: 0.5
+                    }
+                    this.destoryComponent = this.destoryComponent.bind(this)
+                }
+
+                // 组件第一次加载完成触发的事件
+                componentDidMount() {
+                    // 启动循环定时器
+                    this.intervalId = setInterval(() => {
+                        // 注意 此处一定要用箭头函数 不然this的指向不对 （setInterval的调用者是window）
+                        let {opacity} = this.state
+                        opacity -= 0.1
+                        if(opacity <= 0) {
+                            opacity = 1
+                        } 
+                        this.setState({opacity})
+                    }, 200)
+                }
+
+                // 组件即将被注销时会触发的事件
+                componentWillUnmount() {
+                    // 清除定时器
+                    clearInterval(this.intervalId)
+                }
+
+                destoryComponent() {
+                    // react当中清除组件的方法
+                    ReactDOM.unmountComponentAtNode(document.getElementById("test"))
+                }
+
+                render() {
+                    return (
+                        <div>
+                            <h2 style={{opacity:this.state.opacity}}>{this.props.msg}</h2>
+                            <button onClick={this.destoryComponent}>不活了</button>
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(<Life msg="react太难了!!!"/>,document.getElementById("test"))
+        </script>
+	</body>
+</html>

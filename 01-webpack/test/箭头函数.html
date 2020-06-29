@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+        <button id="btn">按钮</button>
+        <script>
+            onload = function () {
+                const btn = document.getElementById('btn')
+                btn.onclick = function() {
+                    // this.style.backgroundColor = 'red'
+                    // setTimeout(function() {
+                    //     // 下面这句话不起作用的原因是 此时的this指代的是window setTimeout === window.setTimeout
+                    //     this.style.backgroundColor = 'red'
+                    // }, 1000)
+                    // 改成箭头函数之后 这句话就有效果了 因为this指向btn
+                    setTimeout(() => this.style.backgroundColor = 'red', 1000)
+                }
+             }
+        </script>
+	</body>
+</html>
